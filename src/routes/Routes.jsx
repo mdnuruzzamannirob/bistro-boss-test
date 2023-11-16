@@ -4,6 +4,8 @@ import Home from "../pages/home/Home";
 import Contact from "../pages/contact/Contact";
 import AllMenu from "../pages/menu/AllMenu";
 import ShopNow from "../pages/shop/ShopNow";
+import Login from "../pages/auth/Login";
+import Register from "../pages/auth/Register";
 
 const Routes = createBrowserRouter([
   {
@@ -29,6 +31,14 @@ const Routes = createBrowserRouter([
       {
         path: "dashboard",
         element: <Home></Home>,
+      },
+      {
+        path: "login",
+        element: <Login></Login>,
+      },
+      {
+        path: "register",
+        element: <Register></Register>,
       },
     ],
   },

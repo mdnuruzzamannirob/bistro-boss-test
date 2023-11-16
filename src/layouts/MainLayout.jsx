@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../pages/shared/Footer";
-import Navbar from "../pages/shared/Navbar";
 import useScrollTop from "../hooks/useScrollTop";
+import Navbar from "../components/shared/Navbar";
+import Footer from "../components/shared/Footer";
 
 const MainLayout = () => {
   useScrollTop();

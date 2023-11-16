@@ -6,10 +6,19 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "./shop-now.css";
 import useFetch from "../../hooks/useFetch";
 import GridCardContainer from "../../components/GridCardContainer";
-import OrderCard from "../shared/OrderCard";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import OrderCard from "../../components/shared/OrderCard";
+import { PropagateLoader } from "react-spinners";
 
 const ShopNow = () => {
-  const { data, loader } = useFetch(`/menu.json`);
+  const categories = ["Salad", "Pizza", "Soup", "Dessert", "Drink"];
+  const location = useLocation();
+  const initialIndex = categories.indexOf(
+    location.state ? location.state : "Salad"
+  );
+  const [tabIndex, setTabIndex] = useState(initialIndex);
+  const { data, loader } = useFetch(`http://localhost:5001/api/v1/menu`);
 
   const dessertMenu = data?.filter((menu) => menu.category === "dessert") || [];
   const pizzaMenu = data?.filter((menu) => menu.category === "pizza") || [];
@@ -20,7 +29,7 @@ const ShopNow = () => {
   if (loader) {
     return (
       <p className="h-screen flex items-center justify-center">
-        <span>Loading...</span>
+        <PropagateLoader color="#BB8506" />
       </p>
     );
   }
@@ -37,17 +46,21 @@ const ShopNow = () => {
           subTitle={"Would you like to try a dish?"}
         ></Cover>
 
-        <Tabs className={"mt-20"}>
+        <Tabs
+          className={"mt-20"}
+          defaultIndex={tabIndex}
+          onSelect={(index) => setTabIndex(index)}
+        >
           <TabList
             className={
               "flex items-center justify-center gap-6 uppercase font-medium"
             }
           >
             <Tab className={"outline-none border-none"}>Salad</Tab>
-            <Tab className={"outline-none border-none"}>pizza</Tab>
-            <Tab className={"outline-none border-none"}>soups</Tab>
-            <Tab className={"outline-none border-none"}>desserts</Tab>
-            <Tab className={"outline-none border-none"}>drinks</Tab>
+            <Tab className={"outline-none border-none"}>Pizza</Tab>
+            <Tab className={"outline-none border-none"}>Soup</Tab>
+            <Tab className={"outline-none border-none"}>Dessert</Tab>
+            <Tab className={"outline-none border-none"}>Drink</Tab>
           </TabList>
 
           <TabPanel>

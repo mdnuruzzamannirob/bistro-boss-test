@@ -1,17 +1,18 @@
 import Container from "../../components/Container";
 import SectionTitle from "../../components/SectionTitle";
-import MenuCard from "../shared/MenuCard";
 import Button from "../../components/Button";
 import GridContainer from "../../components/GridContainer";
 import useFetch from "../../hooks/useFetch";
+import MenuCard from "../../components/shared/MenuCard";
+import { PropagateLoader } from "react-spinners";
 
 const CheckItOut = () => {
-  const { data, loader } = useFetch(`/menu.json`);
+  const { data, loader } = useFetch(`http://localhost:5001/api/v1/menu`);
 
   if (loader) {
     return (
       <p className="h-screen flex items-center justify-center">
-        <span>Loading...</span>
+        <PropagateLoader color="#BB8506" />
       </p>
     );
   }

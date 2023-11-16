@@ -89,7 +89,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="navbar-end gap-5">
-          <Link>
+          <Link to={"/login"}>
             <button className="px-5 btn btn-sm bg-[#BB8506] hover:bg-white  text-white hover:text-[#BB8506] border-0 border-b-4 border-white hover:border-[#BB8506] rounded-lg transition-colors duration-500 ease-in-out font-light outline-none">
               Login
             </button>

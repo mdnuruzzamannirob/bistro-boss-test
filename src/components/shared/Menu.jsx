@@ -5,7 +5,7 @@ import MenuCard from "./MenuCard";
 const Menu = () => {
   const [menus, setMenus] = useState([]);
   useEffect(() => {
-    fetch("/menu.json")
+    fetch("http://localhost:5001/api/v1/menu")
       .then((res) => res.json())
       .then((data) => setMenus(data));
   }, []);

@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
+
 const MenuCard = ({ menu }) => {
   const { recipe, image, name, price } = menu || {};
+
   return (
     <div className="flex justify-between items-center gap-5">
       <img

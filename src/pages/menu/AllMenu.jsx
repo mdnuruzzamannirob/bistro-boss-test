@@ -5,19 +5,16 @@ import SectionTitle from "../../components/SectionTitle";
 import Container from "../../components/Container";
 import useFetch from "../../hooks/useFetch";
 import GridContainer from "../../components/GridContainer";
-import MenuCard from "../shared/MenuCard";
 import Button from "../../components/Button";
+import { Link } from "react-router-dom";
+import MenuCard from "../../components/shared/MenuCard";
+import { PropagateLoader } from "react-spinners";
 
 const AllMenu = () => {
-  const { data, loader, filterData } = useFetch(`/menu.json`, "offered");
-
-  if (loader) {
-    return (
-      <p className="h-screen flex items-center justify-center">
-        <span>Loading...</span>
-      </p>
-    );
-  }
+  const { data, loader, filterData } = useFetch(
+    `http://localhost:5001/api/v1/menu`,
+    "offered"
+  );
 
   //   const offeredMenu = data?.filter((menu) => menu.category === "offered") || [];
   const dessertMenu = data?.filter((menu) => menu.category === "dessert") || [];
@@ -25,6 +22,15 @@ const AllMenu = () => {
   const saladMenu = data?.filter((menu) => menu.category === "salad") || [];
   const soupMenu = data?.filter((menu) => menu.category === "soup") || [];
   const drinksMenu = data?.filter((menu) => menu.category === "drinks") || [];
+
+  if (loader) {
+    return (
+      <p className="h-screen flex items-center justify-center">
+        <PropagateLoader color="#BB8506" />
+      </p>
+    );
+  }
+
   return (
     <Container className={"mt-0"}>
       <Helmet>
@@ -46,9 +52,9 @@ const AllMenu = () => {
               <MenuCard key={menu.id} menu={menu}></MenuCard>
             ))}
           </GridContainer>
-          <div className="flex items-center justify-center">
+          <Link to={"/Shop-Now"} className="flex items-center justify-center">
             <Button title={"ORDER YOUR FAVORITE FOOD"}></Button>
-          </div>
+          </Link>
         </div>
       </Container>
 
@@ -67,9 +73,13 @@ const AllMenu = () => {
             <MenuCard key={menu.id} menu={menu}></MenuCard>
           ))}
         </GridContainer>
-        <div className="flex items-center justify-center">
+        <Link
+          to={`/Shop-Now`}
+          state={"Dessert"}
+          className="flex items-center justify-center"
+        >
           <Button title={"ORDER YOUR FAVORITE DESSERT"}></Button>
-        </div>
+        </Link>
       </Container>
 
       <hr />
@@ -87,9 +97,13 @@ const AllMenu = () => {
             <MenuCard key={menu.id} menu={menu}></MenuCard>
           ))}
         </GridContainer>
-        <div className="flex items-center justify-center">
+        <Link
+          to={"/Shop-Now"}
+          state={"Pizza"}
+          className="flex items-center justify-center"
+        >
           <Button title={"ORDER YOUR FAVORITE PIZZA"}></Button>
-        </div>
+        </Link>
       </Container>
 
       <hr />
@@ -107,9 +121,13 @@ const AllMenu = () => {
             <MenuCard key={menu.id} menu={menu}></MenuCard>
           ))}
         </GridContainer>
-        <div className="flex items-center justify-center">
+        <Link
+          to={"/Shop-Now"}
+          state={"Salad"}
+          className="flex items-center justify-center"
+        >
           <Button title={"ORDER YOUR FAVORITE SALAD"}></Button>
-        </div>
+        </Link>
       </Container>
 
       <hr />
@@ -127,9 +145,13 @@ const AllMenu = () => {
             <MenuCard key={menu.id} menu={menu}></MenuCard>
           ))}
         </GridContainer>
-        <div className="flex items-center justify-center">
+        <Link
+          to={"/Shop-Now"}
+          state={"Soup"}
+          className="flex items-center justify-center"
+        >
           <Button title={"ORDER YOUR FAVORITE SOUP"}></Button>
-        </div>
+        </Link>
       </Container>
 
       <hr />
@@ -147,9 +169,13 @@ const AllMenu = () => {
             <MenuCard key={menu.id} menu={menu}></MenuCard>
           ))}
         </GridContainer>
-        <div className="flex items-center justify-center">
+        <Link
+          to={"/Shop-Now"}
+          state={"Drink"}
+          className="flex items-center justify-center"
+        >
           <Button title={"ORDER YOUR FAVORITE DRINK"}></Button>
-        </div>
+        </Link>
       </Container>
     </Container>
   );

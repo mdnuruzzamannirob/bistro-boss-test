@@ -1,21 +1,23 @@
+import { PropagateLoader } from "react-spinners";
 import Container from "../../components/Container";
 import GridCardContainer from "../../components/GridCardContainer";
 import SectionTitle from "../../components/SectionTitle";
+import OrderCard from "../../components/shared/OrderCard";
 import useFetch from "../../hooks/useFetch";
-import OrderCard from "../shared/OrderCard";
 
 const Features = () => {
-  const { data, loader } = useFetch(`/menu.json`);
+  const { data, loader } = useFetch(`http://localhost:5001/api/v1/menu`);
 
   const filterMenu = data?.filter((menu) => menu.category === "offered") || [];
 
   if (loader) {
     return (
       <p className="h-screen flex items-center justify-center">
-        <span>Loading...</span>
+        <PropagateLoader color="#BB8506" />
       </p>
     );
   }
+
   return (
     <Container>
       <SectionTitle
